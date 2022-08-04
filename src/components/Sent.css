@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.send-new {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(60, 255, 0);
+    color: white;
+    font-size: 45px;
+    font-weight: bolder;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
