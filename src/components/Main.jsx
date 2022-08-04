@@ -9,6 +9,7 @@ import Login from './Login'
 import Inbox from './Inbox'
 import Email from './Email'
 import Sent from './Sent'
+import SentEmail from './SentEmail'
 
 export default function Main() {
     let goTo = useNavigate();
@@ -20,7 +21,7 @@ export default function Main() {
         else {
             goTo('/');
         }
-    }, [login])
+    }, [])
 
     function handleLogin() {
         setLogin(true);
@@ -37,7 +38,7 @@ export default function Main() {
                     <Route path='/inbox' element={<Inbox />} />
                     <Route path='/inbox/:inboxID' element={<Email />} />
                     <Route path='/sent' element={<Sent />} />
-                    <Route path='/sent/:sentID' element={<Email />} />
+                    <Route path='/sent/:sentID' element={<SentEmail/>} />
                     <Route path='*' element={<NoMatch />} />
                 </Route>
             </Routes>

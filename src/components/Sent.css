@@ -4,44 +4,41 @@
     box-sizing: border-box;
 }
 
-.send-new {
-    height: 50px;
-    width: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(60, 255, 0);
-    color: white;
-    font-size: 45px;
-    font-weight: bolder;
-    border-radius: 50%;
-    cursor: pointer;
-    border: none;
-}
-
 .write-mail form,
 .write-mail {
-    width: 300px;
-    min-height: 300px;
+    width: 600px;
+    min-height: 420px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 15px;
     padding: 10px;
 }
 
-.write-mail label,
+.write-mail {
+    min-height: 500px;
+    background-color: antiquewhite;
+    border-radius: 15px;
+    gap: 0px;
+    position: absolute;
+    top: calc(50vh - 210px);
+    left: calc(50vw - 300px);
+}
+
+/* .write-mail label, */
 .write-mail input {
     width: 100%;
-    height: 30px;
+    height: 50px;
     padding: 10px;
+    font-size: 17px;
 }
 
 .write-mail textarea {
     width: 100%;
-    height: 50px;
+    height: 190px;
     padding: 10px;
+    font-size: 17px;
 }
 
 .show {
@@ -50,4 +47,20 @@
 
 .hide {
     display: none;
+}
+
+.send-bttn,
+.send-new {
+    padding: 5px 15px;
+    border-top: 5px solid red;
+    border-right: 5px solid rgb(242, 255, 0);
+    border-bottom: 5px solid rgb(0, 255, 51);
+    border-left: 5px solid blue;
+    border-radius: 15px;
+    font-weight: bold;
+}
+.send-new{
+    position: fixed;
+    right: 200px;
+    bottom: 200px;
 }

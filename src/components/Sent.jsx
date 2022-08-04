@@ -35,12 +35,15 @@ export default function Sent() {
 
 
     async function addToSent(currSent) {
+        //console.log(currSent)
         currSent.timeStamp = new Date().toLocaleDateString();
+
         const docRef = await addDoc(collection(db, "Sent"), currSent);
         currSent.id = docRef.id;
         await updateDoc(docRef, {
             id: docRef.id
         });
+
         setList((arr) => arr.concat([currSent]));
         setReceiverName('');
         setReceiverEmail('');
@@ -60,35 +63,34 @@ export default function Sent() {
                     </div>
                 )
             })}
-            <button className='send-new' onClick={() => { setTextArea((prev) => !prev) }}>+</button>
+            <button className='send-new' onClick={() => { setTextArea((prev) => !prev) }}>Compose New🖋</button>
             <div className={`write-mail ${textArea ? 'show' : 'hide'}`}>
                 <form action="">
-                    <label htmlFor="receiverName">
-                        <input type="text" value={receiverName} id='receiverName' onChange={(e) => {
-                            setReceiverName(e.target.value);
-                        }} />
-                    </label>
-                    <label htmlFor="receiverEmail">
-                        <input type="text" value={receiverEmail} id='receiverEmail' onChange={(e) => {
-                            setReceiverEmail(e.target.value);
-                        }} />
-                    </label>
-                    <label htmlFor="subject">
-                        <input type="text" value={subject} id='subject' onChange={(e) => {
-                            setSubject(e.target.value);
-                        }} />
-                    </label>
-                    <textarea name="" value={message} id='message' onChange={(e) => {
+                    {/* <label htmlFor="receiverName"> */}
+                    <input type="text" value={receiverName} placeholder='receiver-Name' id='receiverName' onChange={(e) => {
+                        setReceiverName(e.target.value);
+                    }} />
+                    {/* </label> */}
+                    {/* <label htmlFor="receiverEmail"> */}
+                    <input type="text" value={receiverEmail} placeholder='receiver-Email' id='receiverEmail' onChange={(e) => {
+                        setReceiverEmail(e.target.value);
+                    }} />
+                    {/* </label> */}
+                    {/* <label htmlFor="subject"> */}
+                    <input type="text" value={subject} placeholder='Subject line' id='subject' onChange={(e) => {
+                        setSubject(e.target.value);
+                    }} />
+                    {/* </label> */}
+                    <textarea name="" value={message} placeholder='Email body' id='message' onChange={(e) => {
                         setMessage(e.target.value);
                     }}></textarea>
-
-                    <button className='send-bttn' onClick={() => {
-                        let currSent = {
-                            receiverName: receiverName, receiverEmail: receiverEmail, subject: subject, message: message,
-                        }
-                        addToSent(currSent);
-                    }}>📩</button>
                 </form>
+                <button className='send-bttn' onClick={() => {
+                    let currSent = {
+                        receiverName: receiverName, receiverEmail: receiverEmail, subject: subject, message: message,
+                    }
+                    addToSent(currSent);
+                }}>Send ✈</button>
             </div>
         </div>
     )
