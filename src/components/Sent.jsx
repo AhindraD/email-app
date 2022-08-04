@@ -78,11 +78,9 @@ export default function Sent() {
                             setSubject(e.target.value);
                         }} />
                     </label>
-                    <label htmlFor="message">
-                        <textarea name="" value={message} id='message' onChange={(e) => {
-                            setMessage(e.target.value);
-                        }}></textarea>
-                    </label>
+                    <textarea name="" value={message} id='message' onChange={(e) => {
+                        setMessage(e.target.value);
+                    }}></textarea>
 
                     <button className='send-bttn' onClick={() => {
                         let currSent = {
