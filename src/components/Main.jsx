@@ -13,7 +13,7 @@ import SentEmail from './SentEmail'
 
 export default function Main() {
     let goTo = useNavigate();
-    let [login, setLogin] = useState(true);
+    let [login, setLogin] = useState(false);
     useEffect(() => {
         if (!login) {
             goTo('/login')
