@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import { collection, getDocs, addDoc, updateDoc } from "firebase/firestore";
 import { db } from '../firebase-config';
 import { useNavigate } from 'react-router-dom';
 import './Sent.css';
@@ -7,12 +7,14 @@ import './Sent.css';
 export default function Sent() {
     let goTo = useNavigate();
     let [list, setList] = useState([{
-        id: Math.round(Math.random() * 100), senderName: 'Ahindra', senderEmail: 'ahindra@mail.com', subject: 'subject-area', message: 'message-area', timeStamp: '11/11/2001'
+        id: Math.round(Math.random() * 100), receiverName: 'Ahindra', receiverEmail: 'ahindra@mail.com', subject: 'subject-area', message: 'message-area', timeStamp: '11/11/2001'
     }]);
-    let [senderName, setSenderName] = useState('');
-    let [senderEmail, setSenderEmail] = useState('');
+    let [receiverName, setReceiverName] = useState('');
+    let [receiverEmail, setReceiverEmail] = useState('');
     let [subject, setSubject] = useState('');
     let [message, setMessage] = useState('');
+
+    let [textArea, setTextArea] = useState(false)
 
     async function getSentMails() {
         const querySnapshot = await getDocs(collection(db, "Sent"));
@@ -33,13 +35,15 @@ export default function Sent() {
 
 
     async function addToSent(currSent) {
+        currSent.timeStamp = new Date().toLocaleDateString();
         const docRef = await addDoc(collection(db, "Sent"), currSent);
-
         currSent.id = docRef.id;
-        currSent.timeStamp = new Date();
+        await updateDoc(docRef, {
+            id: docRef.id
+        });
         setList((arr) => arr.concat([currSent]));
-        setSenderName('');
-        setSenderEmail('');
+        setReceiverName('');
+        setReceiverEmail('');
         setMessage('');
         setSubject('');
 
@@ -49,14 +53,45 @@ export default function Sent() {
         <div className='sent-cont inbox-cont'>
             {list.map((elem) => {
                 return (
-                    <div className="inbox-card" key={elem.id} onClick={() => { goTo(`/inbox/${elem.id}`) }}>
-                        <p className="sender">{elem.senderName}</p>
+                    <div className="inbox-card" key={elem.id} onClick={() => { goTo(`/sent/${elem.id}`) }}>
+                        <p className="sender">{elem.receiverName}</p>
                         <p className="preview">{elem.subject}<span className='preview-msg'>{elem.message}</span></p>
                         <p className="timestamp">{new Date(elem.timeStamp).toDateString()}</p>
                     </div>
                 )
             })}
-            <button className='send-new'>+</button>
+            <button className='send-new' onClick={() => { setTextArea((prev) => !prev) }}>+</button>
+            <div className={`write-mail ${textArea ? 'show' : 'hide'}`}>
+                <form action="">
+                    <label htmlFor="receiverName">
+                        <input type="text" value={receiverName} id='receiverName' onChange={(e) => {
+                            setReceiverName(e.target.value);
+                        }} />
+                    </label>
+                    <label htmlFor="receiverEmail">
+                        <input type="text" value={receiverEmail} id='receiverEmail' onChange={(e) => {
+                            setReceiverEmail(e.target.value);
+                        }} />
+                    </label>
+                    <label htmlFor="subject">
+                        <input type="text" value={subject} id='subject' onChange={(e) => {
+                            setSubject(e.target.value);
+                        }} />
+                    </label>
+                    <label htmlFor="message">
+                        <textarea name="" value={message} id='message' onChange={(e) => {
+                            setMessage(e.target.value);
+                        }}></textarea>
+                    </label>
+
+                    <button className='send-bttn' onClick={() => {
+                        let currSent = {
+                            receiverName: receiverName, receiverEmail: receiverEmail, subject: subject, message: message,
+                        }
+                        addToSent(currSent);
+                    }}>📩</button>
+                </form>
+            </div>
         </div>
     )
 }
