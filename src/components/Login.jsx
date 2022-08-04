@@ -1,10 +1,13 @@
 import React from 'react'
 
-export default function Login() {
+export default function Login(props) {
     return (
-        <button onClick={
-
-        }>
-        </button>
+        <div className='main-cont'>
+            <button className='login' onClick={() => {
+                props.handleLogin()
+            }}>
+                Log In
+            </button >
+        </div>
     )
 }

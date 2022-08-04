@@ -5,7 +5,8 @@ export default function NoMatch() {
     return (
         <div>
             Looks like you are lost!
-            <Link to={''}>Home</Link>
+            <br />
+            <Link className='home' to={''}>Go to Home</Link>
         </div>
     )
 }

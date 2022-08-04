@@ -1,13 +1,103 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+}
+
+.main-cont {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 50px;
+  gap: 20px;
+}
+
+nav {
+  display: flex;
+  gap: 10px;
+}
+
+.home,
+.about,
+.inbox,
+.sent,
+.login {
+  padding: 5px 15px;
+  background-color: rgba(200, 255, 127, 0.779);
+  color: rgb(0, 64, 0);
+  font-weight: 550;
+  text-decoration: none;
+}
+
+.inbox-cont {
+  width: 100vw;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.inbox-card {
+  width: 60%;
+  height: 60px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+  background-color: rgb(240, 240, 240);
+  border-radius: 5px;
+  padding: 0 20px;
+}
+
+.sender {
+  width: 100px;
+  font-weight: 550;
+}
+
+.preview {
+  display: inline;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  flex: 1;
+}
+
+.preview-msg {
+  display: inline;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: gray;
+  margin-left: 5px;
+}
+
+.timestamp {
+  width: 120px;
+}
+
+
+.email-cont {
+  width: 100vw;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.sender-message {
+  width: 800px;
+  min-height: 100px;
+  padding: 20px;
+  border-radius: 15px;
+  background-color: rgb(220, 245, 255);
 }
