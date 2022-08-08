@@ -90,6 +90,7 @@ export default function Sent() {
                         receiverName: receiverName, receiverEmail: receiverEmail, subject: subject, message: message,
                     }
                     addToSent(currSent);
+                    setTextArea((prev) => !prev)
                 }}>Send ✈</button>
             </div>
         </div>
